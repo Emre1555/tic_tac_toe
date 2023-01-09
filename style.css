@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(237, 252, 252);
+}
+
+.gameboard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row{    
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    outline: 1px solid black;
+}
