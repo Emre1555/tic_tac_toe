@@ -39,17 +39,43 @@ const Game = (()=>{
     let turn = "player1"
 
     function move(location){
+        
         if(Gameboard.gameboard[location]==null){
         moves = moves +1
         if(turn=="player1"){
             player1.play(location)
+            checkIfGameEnded("x")
             turn = "player2"
         }else if(turn == "player2" ){
             player2.play(location)
-            turn = "player1"
-        }
+            checkIfGameEnded("o")
+            turn = "player1"    
+        } 
     }
     }
+
+    const checkIfGameEnded = (mark)=> {
+        const winConditions = [
+            [Gameboard.gameboard[0],Gameboard.gameboard[3],Gameboard.gameboard[6]],
+            [Gameboard.gameboard[1],Gameboard.gameboard[4],Gameboard.gameboard[7]],
+            [Gameboard.gameboard[2],Gameboard.gameboard[5],Gameboard.gameboard[8]],
+            [Gameboard.gameboard[0],Gameboard.gameboard[1],Gameboard.gameboard[2]],
+            [Gameboard.gameboard[3],Gameboard.gameboard[4],Gameboard.gameboard[5]],
+            [Gameboard.gameboard[6],Gameboard.gameboard[7],Gameboard.gameboard[8]],
+            [Gameboard.gameboard[0],Gameboard.gameboard[4],Gameboard.gameboard[8]],
+            [Gameboard.gameboard[2],Gameboard.gameboard[4],Gameboard.gameboard[6]]
+          ]
+
+        for(let num=0; num<winConditions.length ; num++){
+            let cond = winConditions[num]
+            if (cond.every(item => item == mark)){
+                console.log(`Winner is ${turn}`)
+            } else if(moves ==9){
+                console.log("Tie!")
+            }
+        } 
+    }
+
     return {move} 
     
 })()
